@@ -9,7 +9,7 @@ class ParkingLOt {
             this.parkingLot.push(car)
             return true
         }
-        return false
+        throw new Error("car must be an object")
     }
 
 }
