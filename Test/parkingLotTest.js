@@ -8,4 +8,12 @@ describe('Testing for parkinLot', function () {
         let parkTheCar = parkingLotObject.parkCar(car)
         assert.isTrue(parkTheCar)
     })
+
+    it.only('given car as other than object should return false', function () {
+        let parkingLotObject = new parkingLot();
+        let car = 0;
+        let parkTheCar = parkingLotObject.parkCar(car)
+        assert.isFalse(parkTheCar)
+    })
+
 })
