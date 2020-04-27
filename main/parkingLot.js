@@ -4,6 +4,7 @@ class ParkingLOt {
         this.parkingLot = []
     }
 
+    // function to park the car
     parkCar(car) {
         if (typeof car === 'object') {
             this.parkingLot.push(car)

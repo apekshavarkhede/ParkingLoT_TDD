@@ -8,12 +8,14 @@ describe('Testing for parkinLot', function () {
         parkingLotObject = new parkingLot();
     })
 
+  //UC1...park the car
     it('given car when park should return park ', function () {
         let car = {}
         let parkTheCar = parkingLotObject.parkCar(car)
         assert.isTrue(parkTheCar)
     })
 
+    // throw exception when  car is not object typed
     it('given car as other than object should throw exception', function () {
         try {
             let car = 0;
@@ -22,5 +24,7 @@ describe('Testing for parkinLot', function () {
             assert.equal(error.message, parkTheCar)
         }
     })
+
+
 
 })
