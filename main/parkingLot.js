@@ -5,9 +5,11 @@ class ParkingLOt {
     }
 
     parkCar(car) {
-        this.parkingLot.push(car)
-        return true
-
+        if (typeof car === 'object') {
+            this.parkingLot.push(car)
+            return true
+        }
+        return false
     }
 
 }
