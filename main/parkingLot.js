@@ -1,7 +1,7 @@
 class ParkingLOt {
 
     parkCar(car) {
-
+        return true
     }
 
 }
