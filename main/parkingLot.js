@@ -13,6 +13,10 @@ class ParkingLOt {
         throw new Error("car must be an object")
     }
 
+    unParkCar(car) {
+
+    }
+
 }
 
 module.exports = ParkingLOt
