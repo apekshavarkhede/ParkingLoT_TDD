@@ -1,5 +1,6 @@
 var assert = require('chai').assert
 var parkingLot = require('../main/parkingLot')
+var owner = require('../main/owner')
 
 describe('Testing for parkinLot', function () {
 

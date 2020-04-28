@@ -1,3 +1,4 @@
+var owner = require('./owner')
 class ParkingLOt {
 
     constructor() {
@@ -13,7 +14,9 @@ class ParkingLOt {
             }
             throw new Error("car must be an object")
         }
+        owner.informParkingLotFull()
         return "Parking lot full"
+
     }
     unParkCar(car) {
         if (this.parkingLot.includes(car)) {
