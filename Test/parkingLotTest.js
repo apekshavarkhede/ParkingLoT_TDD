@@ -42,8 +42,16 @@ describe('Testing for parkinLot', function () {
             let unParkCar = parkingLotObject.unParkCar(car1)
         } catch (error) {
             console.log(error.message);
-
         }
+    })
+
+    // UC3..inform owner when parkingLot is full
+    it.only('given parking lot when is full then inform owner', function () {
+        let car = {}
+        let car1 = {}
+        let parkCar = parkingLotObject.parkCar(car)
+        let parkAnotherCar = parkingLotObject.parkCar(car1)
+        assert.equal(parkAnotherCar, "Parking lot full")
     })
 
 })
