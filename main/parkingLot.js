@@ -6,13 +6,15 @@ class ParkingLOt {
 
     // function to park the car
     parkCar(car) {
-        if (typeof car === 'object') {
-            this.parkingLot.push(car)
-            return true
+        if (!this.checkParkingLotFull()) {
+            if (typeof car === 'object') {
+                this.parkingLot.push(car)
+                return true
+            }
+            throw new Error("car must be an object")
         }
-        throw new Error("car must be an object")
+        return "Parking lot full"
     }
-
     unParkCar(car) {
         if (this.parkingLot.includes(car)) {
             this.parkingLot.pop(car)
