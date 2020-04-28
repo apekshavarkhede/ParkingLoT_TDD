@@ -21,6 +21,10 @@ class ParkingLOt {
         throw new Error("car not parked")
     }
 
+    checkParkingLotFull() {
+        return this.parkingLot.length === 1
+    }
+
 }
 
 module.exports = ParkingLOt
