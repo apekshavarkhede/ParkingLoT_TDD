@@ -1,7 +1,7 @@
 var assert = require('chai').assert
 var parkingLot = require('../main/parkingLot')
 var owner = require('../main/owner')
-var sinon = require('./node_modules/sinon')
+var sinon = require('sinon');
 var expect = require('chai').expect
 
 describe('Testing for parkinLot', function () {
@@ -70,4 +70,11 @@ describe('Testing for parkinLot', function () {
         expect(owner.informParkingLotFull()).to.be.equal(true)
     })
 
+    // inform airportSecurity when parking lot is full 
+    it('should inform airport security when parkingLot is full', function () {
+        let car = {};
+        let car1 = {};
+        let parkCar = parkingLotObject.parkCar(car1)
+        let check = airportSecurity.informParkingLotFull()
+    })
 })
