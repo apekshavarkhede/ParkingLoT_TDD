@@ -66,4 +66,16 @@ describe('Testing for parkinLot', function () {
         stub.restore()
     })
 
+     // check is owner receive parking lot full notification
+     it.only('given parking lot full when check is owner receive notification should return true', function () {
+        let car = {};
+        let car1 = {};
+        let stub = sinon.stub(parkingLotObject, "checkParkingLotFull").
+            onFirstCall().returns(false).onSecondCall().returns(true)
+        expect(parkingLotObject.parkCar(car)).to.be.equal(true)
+        parkingLotObject.parkCar(car1)
+        expect(owner.informParkingLotFull()).to.be.equal(true)
+        stub.restore()
+    })
+
 })

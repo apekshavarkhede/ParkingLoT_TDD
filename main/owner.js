@@ -4,7 +4,7 @@ class Owner {
     }
 
     informParkingLotFull() {
-        this.full = true
+        return this.full = true
     }
 }
 module.exports = new Owner()
