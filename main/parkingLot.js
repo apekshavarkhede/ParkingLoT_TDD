@@ -18,6 +18,7 @@ class ParkingLOt {
             this.parkingLot.pop(car)
             return true
         }
+        throw new Error("car not parked")
     }
 
 }

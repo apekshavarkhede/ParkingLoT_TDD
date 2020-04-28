@@ -35,10 +35,15 @@ describe('Testing for parkinLot', function () {
 
     // throw exception when unpark the car which is not park
     it('given not park car when unpark should throw exception', function () {
-        let car = {};
-        let car1 = {};
-        let parkCar = parkingLotObject.parkCar(car)
-        let unParkCar = parkingLotObject.unParkCar(car1)
+        try {
+            let car = {};
+            let car1 = {};
+            let parkCar = parkingLotObject.parkCar(car)
+            let unParkCar = parkingLotObject.unParkCar(car1)
+        } catch (error) {
+            console.log(error.message);
+
+        }
     })
 
 })
