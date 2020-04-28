@@ -1,4 +1,5 @@
 var owner = require('./owner')
+var airportSecurity = require('../main/airportSecurity')
 class ParkingLOt {
 
     constructor() {
@@ -10,11 +11,12 @@ class ParkingLOt {
         if (!this.checkParkingLotFull()) {
             if (typeof car === 'object') {
                 this.parkingLot.push(car)
+                owner.informParkingLotFull()
+                airportSecurity.informParkingLotFull()
                 return true
             }
             throw new Error("car must be an object")
         }
-        owner.informParkingLotFull()
         return "Parking lot full"
 
     }

@@ -3,6 +3,7 @@ var parkingLot = require('../main/parkingLot')
 var owner = require('../main/owner')
 var sinon = require('sinon');
 var expect = require('chai').expect
+var airportSecurity = require('../main/airportSecurity')
 
 describe('Testing for parkinLot', function () {
 
@@ -71,10 +72,12 @@ describe('Testing for parkinLot', function () {
     })
 
     // inform airportSecurity when parking lot is full 
-    it('should inform airport security when parkingLot is full', function () {
+    it.only('should inform airport security when parkingLot is full', function () {
         let car = {};
         let car1 = {};
         let parkCar = parkingLotObject.parkCar(car1)
+        assert.isTrue(parkCar)
         let check = airportSecurity.informParkingLotFull()
+        expect(check).to.be.equal(true)
     })
 })
