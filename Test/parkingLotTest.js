@@ -1,6 +1,8 @@
 var assert = require('chai').assert
 var parkingLot = require('../main/parkingLot')
 var owner = require('../main/owner')
+var sinon = require('sinon')
+var expect = require('chai').expect
 
 describe('Testing for parkinLot', function () {
 
@@ -10,10 +12,11 @@ describe('Testing for parkinLot', function () {
     })
 
     //UC1...park the car
-    it('given car when park should return park ', function () {
+    it.only('given car when park should return park ', function () {
         let car = {}
-        let parkTheCar = parkingLotObject.parkCar(car)
-        assert.isTrue(parkTheCar)
+        let stub = sinon.stub(parkingLotObject, "checkParkingLotFull").returns(false);
+        expect(parkingLotObject.parkCar(car)).to.be.equal(true)
+        stub.restore()
     })
 
     // throw exception when  car is not object typed
@@ -47,7 +50,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC3..inform owner when parkingLot is full
-    it.only('given parking lot when is full then inform owner', function () {
+    it('given parking lot when is full then inform owner', function () {
         let car = {}
         let car1 = {}
         let parkCar = parkingLotObject.parkCar(car)
