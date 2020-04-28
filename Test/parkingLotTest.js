@@ -30,6 +30,7 @@ describe('Testing for parkinLot', function () {
         let car = {};
         let parkCar = parkingLotObject.parkCar(car)
         let unParkCar = parkingLotObject.unParkCar(car)
+        assert.isTrue(unParkCar)
     })
 
 

@@ -14,7 +14,8 @@ class ParkingLOt {
     }
 
     unParkCar(car) {
-
+        this.parkingLot.pop(car)
+        return true
     }
 
 }
