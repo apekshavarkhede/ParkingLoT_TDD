@@ -8,7 +8,7 @@ describe('Testing for parkinLot', function () {
         parkingLotObject = new parkingLot();
     })
 
-  //UC1...park the car
+    //UC1...park the car
     it('given car when park should return park ', function () {
         let car = {}
         let parkTheCar = parkingLotObject.parkCar(car)
@@ -23,6 +23,13 @@ describe('Testing for parkinLot', function () {
             let parkTheCar = parkingLotObject.parkCar(car)
             assert.equal(error.message, parkTheCar)
         }
+    })
+
+    //UC2..unpark the car
+    it('given parked car when when unpark return true', function () {
+        let car = {};
+        let parkCar = parkingLotObject.parkCar(car)
+        let unParkCar = parkingLotObject.unParkCar(car)
     })
 
 
