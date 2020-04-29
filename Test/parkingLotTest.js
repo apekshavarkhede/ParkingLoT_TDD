@@ -109,5 +109,14 @@ describe('Testing for parkinLot', function () {
         assert.equal(1, parkingLotObject.chekEmptySlots())
     })
 
-
+    // return false when no slot is empty
+    it.only('should return false when checking for empty slot when their is no empty slot', function () {
+        let car = {};
+        let car1 = {};
+        let car2 = {};
+        assert.isTrue(parkingLotObject.parkCar(car))
+        assert.isTrue(parkingLotObject.parkCar(car1))
+        assert.isTrue(parkingLotObject.parkCar(car2))
+        assert.equal(false, parkingLotObject.chekEmptySlots())
+    })
 })
