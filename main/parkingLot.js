@@ -42,6 +42,7 @@ class ParkingLOt {
                 return count;
             }
         }
+        return false
     }
 
 }
