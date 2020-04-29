@@ -80,4 +80,17 @@ describe('Testing for parkinLot', function () {
         let check = airportSecurity.informParkingLotFull()
         expect(check).to.be.equal(true)
     })
+
+    // UC5.. inform owner when space is available when 
+    it.only('inform owner if space is available in parkingLot', function () {
+        let car = {};
+        let parkCar = parkingLotObject.parkCar(car)
+        assert.isTrue(parkCar)
+        let unParkCar = parkingLotObject.unParkCar(car)
+        assert.isTrue(unParkCar)
+        let informOwner = owner.informOwnerSpaceIsAvailable()
+    })
+
+
+
 })
