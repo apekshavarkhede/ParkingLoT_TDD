@@ -10,13 +10,13 @@ describe('Testing for parkinLot', function () {
     let parkingLotObject;
     beforeEach(function () {
         parkingLotObject = new parkingLot();
-        // sinon.stub(parkingLotObject, "checkParkingLotFull").
-        //     onFirstCall().returns(false).onSecondCall().returns(true)
+        sinon.stub(parkingLotObject, "checkParkingLotFull").
+            onFirstCall().returns(false).onSecondCall().returns(true)
     })
 
-    // this.afterEach(function () {
-    //     parkingLotObject.checkParkingLotFull.restore()
-    // })
+    this.afterEach(function () {
+        parkingLotObject.checkParkingLotFull.restore()
+    })
 
     //UC1...park the car
     it('given car when park should return park ', function () {
@@ -55,17 +55,11 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC3..inform owner when parkingLot is full
-    it.only('given parking lot when is full then inform owner', function () {
+    it('given parking lot when is full then inform owner', function () {
         let car = {}
         let car1 = {}
-        let car2 = {}
-        let car3 = {}
-        let car4 = {}
-        expect(parkingLotObject.parkCar(car)).to.be.equal(true)
-        expect(parkingLotObject.parkCar(car1)).to.be.equal(true)
-        expect(parkingLotObject.parkCar(car2)).to.be.equal(true)
-        expect(parkingLotObject.parkCar(car3)).to.be.equal(true)
-        expect(parkingLotObject.parkCar(car4)).to.be.equal("Parking lot full")
+        assert.equal(true, parkingLotObject.parkCar(car))
+        assert.equal(parkingLotObject.parkCar(car1), "Parking lot full")
     })
 
     // check is owner receive parking lot full notification
@@ -96,9 +90,16 @@ describe('Testing for parkinLot', function () {
         assert.isTrue(unParkCar)
         let informOwner = owner.informOwnerSpaceIsAvailable()
     })
+})
 
+describe('Testing parkingLot extra functionality', function () {
+
+    let parkingLotObject;
+    beforeEach(function () {
+        parkingLotObject = new parkingLot();
+    })
     // UC6..give owner parkingLot attendance
-    it.only('should inform owner about empty slots in parking car', function () {
+    it('should inform owner about empty slots in parking car', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
@@ -110,7 +111,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // return false when no slot is empty
-    it.only('should return false when checking for empty slot when their is no empty slot', function () {
+    it('should return false when checking for empty slot when their is no empty slot', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
@@ -121,7 +122,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC7.. driver can find car
-    it.only('given park car when driver serach car should able to search car', function () {
+    it('given park car when driver serach car should able to search car', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
@@ -132,6 +133,5 @@ describe('Testing for parkinLot', function () {
         let findDriverCar = parkingLotObject.findCar(car2)
         assert.equal(2, findDriverCar)
     })
-
 
 })

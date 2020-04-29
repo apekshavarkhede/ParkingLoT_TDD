@@ -8,10 +8,10 @@ class ParkingLOt {
 
     // function to park the car
     parkCar(car) {
-        if (!this.checkParkingLotFull()) {
+        if (this.checkParkingLotFull() === false) {
             if (typeof car === 'object') {
                 this.parkingLot.push(car)
-                if (this.checkParkingLotFull()) {
+                if (this.checkParkingLotFull() === true) {
                     owner.informParkingLotFull()
                     airportSecurity.informParkingLotFull()
                 }
