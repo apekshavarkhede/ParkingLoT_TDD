@@ -23,6 +23,7 @@ class ParkingLOt {
     unParkCar(car) {
         if (this.parkingLot.includes(car)) {
             this.parkingLot.pop(car)
+            owner.informOwnerSpaceIsAvailable()
             return true
         }
         throw new Error("car not parked")
