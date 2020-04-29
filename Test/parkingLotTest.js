@@ -55,11 +55,17 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC3..inform owner when parkingLot is full
-    it('given parking lot when is full then inform owner', function () {
+    it.only('given parking lot when is full then inform owner', function () {
         let car = {}
         let car1 = {}
+        let car2 = {}
+        let car3 = {}
+        let car4 = {}
         expect(parkingLotObject.parkCar(car)).to.be.equal(true)
-        expect(parkingLotObject.parkCar(car1)).to.be.equal("Parking lot full")
+        expect(parkingLotObject.parkCar(car1)).to.be.equal(true)
+        expect(parkingLotObject.parkCar(car2)).to.be.equal(true)
+        expect(parkingLotObject.parkCar(car3)).to.be.equal(true)
+        expect(parkingLotObject.parkCar(car4)).to.be.equal("Parking lot full")
     })
 
     // check is owner receive parking lot full notification
@@ -72,7 +78,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // inform airportSecurity when parking lot is full 
-    it.only('should inform airport security when parkingLot is full', function () {
+    it('should inform airport security when parkingLot is full', function () {
         let car = {};
         let car1 = {};
         let parkCar = parkingLotObject.parkCar(car1)
@@ -82,7 +88,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC5.. inform owner when space is available when 
-    it.only('inform owner if space is available in parkingLot', function () {
+    it('inform owner if space is available in parkingLot', function () {
         let car = {};
         let parkCar = parkingLotObject.parkCar(car)
         assert.isTrue(parkCar)
@@ -92,7 +98,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC6..give owner parkingLot attendance
-    it.only('should inform owner about empty slots in parking car', function () {
+    it('should inform owner about empty slots in parking car', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
@@ -100,7 +106,7 @@ describe('Testing for parkinLot', function () {
         assert.isTrue(parkingLotObject.parkCar(car1))
         assert.isTrue(parkingLotObject.parkCar(car2))
         assert.isTrue(parkingLotObject.unParkCar(car1))
-        assert.equal(1,parkingLotObject.chekEmptySlots())
+        assert.equal(1, parkingLotObject.chekEmptySlots())
     })
 
 
