@@ -42,6 +42,14 @@ class ParkingLOt {
                 return count;
             }
         }
+        return false
+    }
+
+    findCar(car) {
+        if (this.parkingLot.includes(car)) {
+            let slotNo = this.parkingLot.indexOf(car)
+            return slotNo
+        }
     }
 
 }

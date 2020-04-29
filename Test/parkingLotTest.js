@@ -123,8 +123,15 @@ describe('Testing for parkinLot', function () {
     // UC7.. driver can find car
     it.only('given park car when driver serach car should able to search car', function () {
         let car = {};
+        let car1 = {};
+        let car2 = {};
         let parkCar = parkingLotObject.parkCar(car)
         assert.isTrue(parkCar)
-        let findDriverCar = parkingLotObject.findCar(car)
+        assert.isTrue(parkingLotObject.parkCar(car1))
+        assert.isTrue(parkingLotObject.parkCar(car2))
+        let findDriverCar = parkingLotObject.findCar(car2)
+        assert.equal(2, findDriverCar)
     })
+
+
 })
