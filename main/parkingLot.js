@@ -18,11 +18,12 @@ class ParkingLOt {
             throw new Error("car must be an object")
         }
         return "Parking lot full"
-
     }
+
     unParkCar(car) {
         if (this.parkingLot.includes(car)) {
-            this.parkingLot.pop(car)
+            let indexOfParkCar = this.parkingLot.indexOf(car)
+            this.parkingLot.splice(indexOfParkCar, 1, null)
             owner.informOwnerSpaceIsAvailable()
             return true
         }
@@ -30,7 +31,15 @@ class ParkingLOt {
     }
 
     checkParkingLotFull() {
-        return this.parkingLot.length === 1
+        return this.parkingLot.length === 4
+    }
+
+    chekEmptySlots() {
+        for (let count = 0; count < this.parkingLot.length; count++) {
+            if (this.parkingLot[count] === null) {
+                return count;
+            }
+        }
     }
 
 }
