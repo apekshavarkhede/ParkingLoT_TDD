@@ -10,13 +10,13 @@ describe('Testing for parkinLot', function () {
     let parkingLotObject;
     beforeEach(function () {
         parkingLotObject = new parkingLot();
-        sinon.stub(parkingLotObject, "checkParkingLotFull").
-            onFirstCall().returns(false).onSecondCall().returns(true)
+        // sinon.stub(parkingLotObject, "checkParkingLotFull").
+        //     onFirstCall().returns(false).onSecondCall().returns(true)
     })
 
-    this.afterEach(function () {
-        parkingLotObject.checkParkingLotFull.restore()
-    })
+    // this.afterEach(function () {
+    //     parkingLotObject.checkParkingLotFull.restore()
+    // })
 
     //UC1...park the car
     it('given car when park should return park ', function () {
@@ -91,6 +91,17 @@ describe('Testing for parkinLot', function () {
         let informOwner = owner.informOwnerSpaceIsAvailable()
     })
 
+    // UC6..give owner parkingLot attendance
+    it.only('should inform owner about empty slots in parking car', function () {
+        let car = {};
+        let car1 = {};
+        let car2 = {};
+        assert.isTrue(parkingLotObject.parkCar(car))
+        assert.isTrue(parkingLotObject.parkCar(car1))
+        assert.isTrue(parkingLotObject.parkCar(car2))
+        assert.isTrue(parkingLotObject.unParkCar(car1))
+        assert.equal(1,parkingLotObject.chekEmptySlots())
+    })
 
 
 })
