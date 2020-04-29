@@ -98,7 +98,7 @@ describe('Testing for parkinLot', function () {
     })
 
     // UC6..give owner parkingLot attendance
-    it('should inform owner about empty slots in parking car', function () {
+    it.only('should inform owner about empty slots in parking car', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
