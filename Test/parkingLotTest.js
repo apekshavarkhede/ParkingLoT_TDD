@@ -14,21 +14,21 @@ describe('Testing for parkinLot', function () {
             onFirstCall().returns(false).onSecondCall().returns(true)
     })
 
-    this.afterEach(function () {
+    afterEach(function () {
         parkingLotObject.checkParkingLotFull.restore()
     })
 
     //UC1...park the car
     it('given car when park should return park ', function () {
         let car = {}
-        expect(parkingLotObject.parkCar(car)).to.be.equal(true)
+        expect(parkingLotObject.parkCar(car, new Date())).to.be.equal(true)
     })
 
     // throw exception when  car is not object typed
     it('given car as other than object should throw exception', function () {
         try {
             let car = 0;
-            let parkTheCar = parkingLotObject.parkCar(car)
+            let parkTheCar = parkingLotObject.parkCar(car, new Date())
         } catch (error) {
             assert.equal(error.message, "car must be an object")
         }
@@ -37,8 +37,8 @@ describe('Testing for parkinLot', function () {
     //UC2..unpark the car
     it('given parked car when when unpark return true', function () {
         let car = {};
-        let parkCar = parkingLotObject.parkCar(car)
-        let unParkCar = parkingLotObject.unParkCar(car)
+        let parkCar = parkingLotObject.parkCar(car, new Date())
+        let unParkCar = parkingLotObject.unParkCar(car, new Date())
         assert.isTrue(unParkCar)
     })
 
@@ -47,8 +47,8 @@ describe('Testing for parkinLot', function () {
         try {
             let car = {};
             let car1 = {};
-            let parkCar = parkingLotObject.parkCar(car)
-            let unParkCar = parkingLotObject.unParkCar(car1)
+            let parkCar = parkingLotObject.parkCar(car, new Date())
+            let unParkCar = parkingLotObject.unParkCar(car1, new Date())
         } catch (error) {
             assert.equal(error.message, "car not parked");
         }
@@ -58,16 +58,16 @@ describe('Testing for parkinLot', function () {
     it('given parking lot when is full then inform owner', function () {
         let car = {}
         let car1 = {}
-        assert.equal(true, parkingLotObject.parkCar(car))
-        assert.equal(parkingLotObject.parkCar(car1), "Parking lot full")
+        assert.equal(true, parkingLotObject.parkCar(car, new Date()))
+        assert.equal(parkingLotObject.parkCar(car1, new Date()), "Parking lot full")
     })
 
     // check is owner receive parking lot full notification
     it('given parking lot full when check is owner receive notification should return true', function () {
         let car = {};
         let car1 = {};
-        expect(parkingLotObject.parkCar(car)).to.be.equal(true)
-        parkingLotObject.parkCar(car1)
+        expect(parkingLotObject.parkCar(car, new Date())).to.be.equal(true)
+        parkingLotObject.parkCar(car1, new Date())
         expect(owner.informParkingLotFull()).to.be.equal(true)
     })
 
@@ -75,7 +75,7 @@ describe('Testing for parkinLot', function () {
     it('should inform airport security when parkingLot is full', function () {
         let car = {};
         let car1 = {};
-        let parkCar = parkingLotObject.parkCar(car1)
+        let parkCar = parkingLotObject.parkCar(car1, new Date())
         assert.isTrue(parkCar)
         let check = airportSecurity.informParkingLotFull()
         expect(check).to.be.equal(true)
@@ -84,7 +84,7 @@ describe('Testing for parkinLot', function () {
     // UC5.. inform owner when space is available when 
     it('inform owner if space is available in parkingLot', function () {
         let car = {};
-        let parkCar = parkingLotObject.parkCar(car)
+        let parkCar = parkingLotObject.parkCar(car, new Date())
         assert.isTrue(parkCar)
         let unParkCar = parkingLotObject.unParkCar(car)
         assert.isTrue(unParkCar)
@@ -103,10 +103,10 @@ describe('Testing parkingLot extra functionality', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
-        assert.isTrue(parkingLotObject.parkCar(car))
-        assert.isTrue(parkingLotObject.parkCar(car1))
-        assert.isTrue(parkingLotObject.parkCar(car2))
-        assert.isTrue(parkingLotObject.unParkCar(car1))
+        assert.isTrue(parkingLotObject.parkCar(car, new Date()))
+        assert.isTrue(parkingLotObject.parkCar(car1, new Date()))
+        assert.isTrue(parkingLotObject.parkCar(car2, new Date()))
+        assert.isTrue(parkingLotObject.unParkCar(car1, new Date()))
         assert.equal(1, parkingLotObject.chekEmptySlots())
     })
 
@@ -115,9 +115,9 @@ describe('Testing parkingLot extra functionality', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
-        assert.isTrue(parkingLotObject.parkCar(car))
-        assert.isTrue(parkingLotObject.parkCar(car1))
-        assert.isTrue(parkingLotObject.parkCar(car2))
+        assert.isTrue(parkingLotObject.parkCar(car, new Date()))
+        assert.isTrue(parkingLotObject.parkCar(car1, new Date()))
+        assert.isTrue(parkingLotObject.parkCar(car2, new Date()))
         assert.equal(false, parkingLotObject.chekEmptySlots())
     })
 
@@ -126,12 +126,18 @@ describe('Testing parkingLot extra functionality', function () {
         let car = {};
         let car1 = {};
         let car2 = {};
-        let parkCar = parkingLotObject.parkCar(car)
+        let parkCar = parkingLotObject.parkCar(car, new Date())
         assert.isTrue(parkCar)
-        assert.isTrue(parkingLotObject.parkCar(car1))
-        assert.isTrue(parkingLotObject.parkCar(car2))
+        assert.isTrue(parkingLotObject.parkCar(car1, new Date()))
+        assert.isTrue(parkingLotObject.parkCar(car2, new Date()))
         let findDriverCar = parkingLotObject.findCar(car2)
         assert.equal(2, findDriverCar)
     })
 
+    // UC8.. inform owner about parking time of car
+    it(`should inform owner about parkingTime of car`, function () {
+        let car = {};
+        let parkCar = parkingLotObject.parkCar(car, new Date())
+        assert.isTrue(parkCar)
+    })
 })

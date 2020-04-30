@@ -7,7 +7,7 @@ class ParkingLOt {
     }
 
     // function to park the car
-    parkCar(car) {
+    parkCar(car,parkTime) {
         if (this.checkParkingLotFull() === false) {
             if (typeof car === 'object') {
                 this.parkingLot.push(car)
