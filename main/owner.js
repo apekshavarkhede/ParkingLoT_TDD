@@ -5,7 +5,8 @@ class Owner {
     }
 
     informOwnerSpaceIsAvailable() {
-        return this.empty = true
+        this.full = false
+        return "space is available"
     }
 }
 module.exports = new Owner()
