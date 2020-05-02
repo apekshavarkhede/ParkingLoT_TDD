@@ -5,6 +5,7 @@ var sinon = require('sinon');
 var expect = require('chai').expect
 var airportSecurity = require('../main/airportSecurity')
 var driver = require('../main/driver')
+var vehicle = require('../main/vehicle')
 
 describe('Testing for parkinLot', function () {
 
@@ -169,4 +170,12 @@ describe('Testing parkingLot extra functionality', function () {
         assert.isTrue(parkCar)
         assert.isTrue(parkAnotherCar)
     })
+
+    //UC11... search place to park the large car
+    it(`should search place to park the large vehicle`, function () {
+        let car = new vehicle('large');
+        let driverType = driver.type.NORMAL;
+        assert.isTrue(parkingLotObject.parkCar(car, driverType))
+    })
+
 })
