@@ -172,10 +172,13 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     //UC11... search place to park the large car
-    it(`should search place to park the large vehicle`, function () {
-        let car = new vehicle('large');
-        let driverType = driver.type.NORMAL;
-        assert.isTrue(parkingLotObject.parkCar(car, driverType))
+    it.only(`should search place to park the large vehicle`, function () {
+        parkingLotObject = new parkingLot(3, 3, 6)
+        let totalCars = [{}, {}, new vehicle('large')]
+        totalCars.forEach(car => {
+            let parkCar = parkingLotObject.parkCar(car)
+            assert.isTrue(parkCar)
+        })
     })
 
 })
