@@ -36,7 +36,7 @@ class ParkingLOt {
         return "Parking lot full"
     }
 
-    findSlotToParkAndParkCar(car) {
+    searchPlaceForNormalDriverAndParkCar(car) {
         this.noOfVehicles++
         for (let lot = 0; lot < this.parkingLot.length; lot++) {
             for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
@@ -49,7 +49,7 @@ class ParkingLOt {
         }
     }
 
-    searchPlaceForHandicapDriver(car) {
+    searchPlaceForHandicapDriverAndParkCar(car) {
         for (let lot = 0; lot < this.parkingLot.length; lot++) {
             for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
                 if (this.parkingLot[lot][slot] === null) {
