@@ -43,7 +43,10 @@ class ParkingLOt {
             for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
                 if (this.parkingLot[slot][lot] === null) {
                     this.parkingLot[slot][lot] = car
-                    this.checkParkingLotFull()
+                    if (this.checkParkingLotFull()) {
+                        owner.informParkingLotFull()
+                        airportSecurity.informParkingLotFull()
+                    }
                     return true
                 }
             }
@@ -56,7 +59,10 @@ class ParkingLOt {
                 if (this.parkingLot[lot][slot] === null) {
                     this.parkingLot[lot][slot] = car
                     this.noOfVehicles++
-                    this.checkParkingLotFull()
+                    if (this.checkParkingLotFull()) {
+                        owner.informParkingLotFull()
+                        airportSecurity.informParkingLotFull()
+                    }
                     return true
                 }
             }
@@ -73,6 +79,11 @@ class ParkingLOt {
         for (let slot = 0; slot < this.parkingLot[largeLot].length; slot++) {
             if (this.parkingLot[largeLot][slot] === null) {
                 this.parkingLot[largeLot][slot] = car
+                this.noOfVehicles++
+                if (this.checkParkingLotFull()) {
+                    owner.informParkingLotFull()
+                    airportSecurity.informParkingLotFull()
+                }
                 return true
             }
         }
@@ -93,8 +104,6 @@ class ParkingLOt {
 
     checkParkingLotFull() {
         if (this.noOfVehicles === this.noOfVehiclesAllowToPark) {
-            owner.informParkingLotFull()
-            airportSecurity.informParkingLotFull()
             return true
         }
         return false;
