@@ -21,10 +21,12 @@ class ParkingLOt {
     }
 
     // function to park the car
-    parkCar(car, parkTime) {
+    parkCar(car, parkTime, driverType) {
         if (this.checkParkingLotFull() === false) {
             if (typeof car === 'object') {
-                return this.findSlotToParkAndParkCar(car)
+                if (driverType === 'normal') {
+                    return this.findSlotToParkAndParkCar(car)
+                }
             }
             throw new Error("car must be an object")
         }
