@@ -27,6 +27,9 @@ class ParkingLOt {
                 if (driverType === 'normal') {
                     return this.findSlotToParkAndParkCar(car)
                 }
+                if (driverType === 'handicap') {
+                    return this.searchPlaceForHandicapDriver(car)
+                }
             }
             throw new Error("car must be an object")
         }
@@ -39,6 +42,19 @@ class ParkingLOt {
             for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
                 if (this.parkingLot[slot][lot] === null) {
                     this.parkingLot[slot][lot] = car
+                    this.checkParkingLotFull()
+                    return true
+                }
+            }
+        }
+    }
+
+    searchPlaceForHandicapDriver(car) {
+        for (let lot = 0; lot < this.parkingLot.length; lot++) {
+            for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
+                if (this.parkingLot[lot][slot] === null) {
+                    this.parkingLot[lot][slot] = car
+                    this.noOfVehicles++
                     this.checkParkingLotFull()
                     return true
                 }

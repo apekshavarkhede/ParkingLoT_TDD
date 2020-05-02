@@ -160,10 +160,13 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC10..search nearest place to park car for handicap driver
-    it(`should return nearest place for handicap driver to park the car`, function () {
+    it.only(`should return nearest place for handicap driver to park the car`, function () {
         let car = {};
+        let car1 = {};
         let driverType = driver.type.HANDICAP;
-        let parkCar = parkingLotObject.parkCar(car, new Date(), driverType)
+        let parkCar = parkingLotObject.parkCar(car, new Date(), driver.type.NORMAL)
+        let parkAnotherCar = parkingLotObject.parkCar(car1, new Date(), driverType)
         assert.isTrue(parkCar)
+        assert.isTrue(parkAnotherCar)
     })
 })
