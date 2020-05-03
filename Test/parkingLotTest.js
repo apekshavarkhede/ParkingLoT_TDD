@@ -182,15 +182,16 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // testCase for function not defined
-    it.only(`should not exist`, () => {
+    it(`should not exist`, () => {
         expect(parkingLotObject.findCarWithSpecificColor()).to.be.not.undefined
     });
 
     //UC12..search all white car locations
-    it(`should search all white cars`, function () {
+    it.only(`should search all white cars`, function () {
         let totalCars = [
             { type: 'small', color: 'silver' },
             { type: 'small', color: 'white' },
+            { type: 'small', color: 'black' },
             { type: 'small', color: 'white' },
         ]
         totalCars.forEach(car => {
@@ -198,11 +199,11 @@ describe('Testing parkingLot extra functionality', function () {
             assert.isTrue(parkCar)
         })
         let whiteCars = parkingLotObject.findCarWithSpecificColor('white')
-        
+        assert.equal(whiteCars[0].lot, 1)
+        assert.equal(whiteCars[0].slot, 0)
+        assert.equal(whiteCars[1].lot, 1)
+        assert.equal(whiteCars[1].slot, 1)
     })
-
-
-
 
 })
 

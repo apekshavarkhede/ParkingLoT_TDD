@@ -76,7 +76,10 @@ class ParkingLOt {
     findLargeLot() {
         let largeLot = 0;
         for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            if (this.parkingLot[lot].length >= this.parkingLot[largeLot].length) {
+            if (this.parkingLot[lot].length === this.parkingLot[largeLot].length) {
+                largeLot = largeLot
+            }
+            if (this.parkingLot[lot].length > this.parkingLot[largeLot].length) {
                 largeLot = lot
             }
         }
@@ -145,6 +148,24 @@ class ParkingLOt {
                 }
             }
         }
+    }
+
+    findCarWithSpecificColor(color) {
+        this.cars = []
+        for (let lot = 0; lot < this.parkingLot.length; lot++) {
+            for (let slot = 0; slot < this.parkingLot.length; slot++) {
+                if (this.parkingLot[lot][slot] != null) {
+                    if (this.parkingLot[lot][slot].color === color) {
+                        let car = {
+                            lot: lot,
+                            slot: slot
+                        }
+                        this.cars.push(car)
+                    }
+                }
+            }
+        }
+        return this.cars
     }
 
 }
