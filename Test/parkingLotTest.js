@@ -161,7 +161,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC10..search nearest place to park car for handicap driver
-    it.only(`should return nearest place for handicap driver to park the car`, function () {
+    it(`should return nearest place for handicap driver to park the car`, function () {
         let car = {};
         let car1 = {};
         let driverType = driver.type.HANDICAP;
@@ -172,8 +172,8 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     //UC11... search place to park the large car
-    it.only(`should search place to park the large vehicle`, function () {
-        parkingLotObject = new parkingLot(3, 3, 6)
+    it(`should search place to park the large vehicle`, function () {
+        // parkingLotObject = new parkingLot(3, 3, 6)
         let totalCars = [{}, {}, new vehicle('large')]
         totalCars.forEach(car => {
             let parkCar = parkingLotObject.parkCar(car)
@@ -181,4 +181,14 @@ describe('Testing parkingLot extra functionality', function () {
         })
     })
 
+    // testCase for function not defined
+    it(`should not exist`, () => {
+        expect(parkingLotObject.findCarWithSpecificColor()).to.not.be.undefined;
+    });
+
+
+
+
 })
+
+
