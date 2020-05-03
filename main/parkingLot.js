@@ -73,21 +73,18 @@ class ParkingLOt {
         }
     }
 
-    findLargeLot() {
-        let largeLot = 0;
-        for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            if (this.parkingLot[lot].length === this.parkingLot[largeLot].length) {
-                largeLot = largeLot
-            }
-            if (this.parkingLot[lot].length > this.parkingLot[largeLot].length) {
-                largeLot = lot
-            }
-        }
-        return largeLot
-    }
-
     parkLargeVehicle(car) {
-        let largeLot = this.findLargeLot();
+        let arr = [];
+        for (let lot = 0; lot < this.parkingLot.length; lot++) {
+            let largelot = 0
+            for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
+                if (this.parkingLot[lot][slot] === null) {
+                    largelot++;
+                }
+            }
+            arr[lot] = largelot - 1
+        }
+        let largeLot = Math.max.apply(null, arr)
         for (let slot = 0; slot < this.parkingLot[largeLot].length; slot++) {
             if (this.parkingLot[largeLot][slot] === null) {
                 this.parkingLot[largeLot][slot] = car
@@ -99,6 +96,7 @@ class ParkingLOt {
                 return true
             }
         }
+        return false
     }
 
     unParkCar(car) {
