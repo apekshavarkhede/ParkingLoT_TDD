@@ -164,7 +164,7 @@ describe('Testing parkingLot extra functionality', function () {
     it(`should return nearest place for handicap driver to park the car`, function () {
         let car = {};
         let car1 = {};
-        let driverType = driver.type.HANDICAP;
+        let driverType = `${driver.driverType}`
         let parkCar = parkingLotObject.parkCar(car, new Date(), driver.type.NORMAL)
         let parkAnotherCar = parkingLotObject.parkCar(car1, new Date(), driverType)
         assert.isTrue(parkCar)
@@ -187,7 +187,7 @@ describe('Testing parkingLot extra functionality', function () {
     });
 
     //UC12..search all white car locations
-    it.only(`should search all white cars`, function () {
+    it(`should search all white cars`, function () {
         let totalCars = [
             { type: 'small', color: 'silver' },
             { type: 'small', color: 'white' },
@@ -195,7 +195,7 @@ describe('Testing parkingLot extra functionality', function () {
             { type: 'small', color: 'white' },
         ]
         totalCars.forEach(car => {
-            let parkCar = parkingLotObject.parkCar(car)
+            let parkCar = parkingLotObject.parkCar(car, new Date())
             assert.isTrue(parkCar)
         })
         let whiteCars = parkingLotObject.findCarWithSpecificColor('white')
@@ -204,6 +204,27 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(whiteCars[1].lot, 1)
         assert.equal(whiteCars[1].slot, 1)
     })
+
+    // UC13...find Toyota cars having blue color
+    it(`should return all blue toyota blue cars`, () => {
+        let totalCars = [
+            { type: 'small', company: 'Toyota', color: `White` },
+            { type: 'small', company: 'Toyota', color: `Blue` },
+            { type: 'small', company: 'Mahindra', color: `White` },
+            { type: 'small', company: 'Toyota', color: `Blue` },
+        ]
+        totalCars.forEach(car => {
+            let parkCar = parkingLotObject.parkCar(car, new Date())
+            assert.isTrue(parkCar)
+        })
+        let cars = parkingLotObject.searchCarsWithCompanyAndColor('Toyota', 'Blue')
+        assert.equal(cars[0].lot, 1)
+        assert.equal(cars[0].slot, 0)
+        assert.equal(cars[1].lot, 1)
+        assert.equal(cars[1].slot, 1)
+
+    })
+
 
 })
 

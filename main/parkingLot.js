@@ -44,7 +44,7 @@ class ParkingLOt {
             for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
                 if (this.parkingLot[slot][lot] === null) {
                     this.parkingLot[slot][lot] = car
-                    console.log("ur car is park at ", slot, lot);
+                    console.log("ur car is park at ", slot, lot, car);
 
                     this.noOfVehicles++
                     if (this.checkParkingLotFull()) {
@@ -165,6 +165,26 @@ class ParkingLOt {
         }
         return this.cars
     }
+
+    searchCarsWithCompanyAndColor(company, color) {
+        let cars = [];
+        for (let lot = 0; lot < this.parkingLot.length; lot++) {
+            for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
+                if (this.parkingLot[lot][slot] != null) {
+                    if (this.parkingLot[lot][slot].company === company && this.parkingLot[lot][slot].color === color) {
+                        let car = {
+                            lot: lot,
+                            slot: slot
+                        }
+                        cars.push(car)
+                    }
+                }
+            }
+        }
+        return cars
+    }
+
+
 
 }
 
