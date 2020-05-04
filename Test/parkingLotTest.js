@@ -225,6 +225,25 @@ describe('Testing parkingLot extra functionality', function () {
 
     })
 
+    // UC14...find BMW cars
+    it.only(`should search car by company name`, () => {
+        let totalCars = [
+            { type: 'small', company: 'Toyota', color: `White` },
+            { type: 'small', company: 'BMW', color: `Blue` },
+            { type: 'small', company: 'Mahindra', color: `White` },
+            { type: 'small', company: 'BMW', color: `Blue` },
+        ]
+        totalCars.forEach(car => {
+            let parkCar = parkingLotObject.parkCar(car, new Date())
+            assert.isTrue(parkCar)
+        })
+
+        let cars = parkingLotObject.searchCarByCompanyName('BMW')
+        assert.equal(cars[0].lot, 1)
+        assert.equal(cars[0].slot, 0)
+        assert.equal(cars[1].lot, 1)
+        assert.equal(cars[1].slot, 1)
+    })
 
 })
 

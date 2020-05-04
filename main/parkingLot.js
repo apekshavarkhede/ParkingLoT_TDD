@@ -184,6 +184,23 @@ class ParkingLOt {
         return cars
     }
 
+    searchCarByCompanyName(company) {
+        let cars = [];
+        for (let lot = 0; lot < this.parkingLot.length; lot++) {
+            for (let slot = 0; slot < this.parkingLot.length; slot++) {
+                if (this.parkingLot[lot][slot] != null) {
+                    if (this.parkingLot[lot][slot].company === company) {
+                        let car = {
+                            lot: lot,
+                            slot: slot
+                        }
+                        cars.push(car)
+                    }
+                }
+            }
+        }
+        return cars;
+    }
 
 
 }
