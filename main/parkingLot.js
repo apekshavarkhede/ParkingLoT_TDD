@@ -202,6 +202,29 @@ class ParkingLOt {
         return cars;
     }
 
+    searchCarsParkBefore30Minutes() {
+        let date = new Date();
+        let currentTiming = date.getTime()
+        let cars = []
+        for (let i = 0; i < this.parkingLot.length; i++) {
+            for (let j = 0; j < this.parkingLot[i].length; j++) {
+                if (this.parkingLot[i][j] != null) {
+                    let difference = ((currentTiming - this.parkingLot[i][j].parkTiming) / 1000)
+                    difference /= 60;
+                    let differenceBetweenParkedTimining = Math.abs(Math.round(difference))
+                    if (differenceBetweenParkedTimining <= 30) {
+                        let carPosition = {
+                            lot: i,
+                            slot: j
+                        }
+                        cars.push(carPosition)
+                    }
+                }
+            }
+        }
+        return cars
+    }
+
 
 }
 

@@ -226,7 +226,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC14...find BMW cars
-    it.only(`should search car by company name`, () => {
+    it(`should search car by company name`, (done) => {
         let totalCars = [
             { type: 'small', company: 'Toyota', color: `White` },
             { type: 'small', company: 'BMW', color: `Blue` },
@@ -243,8 +243,38 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(cars[0].slot, 0)
         assert.equal(cars[1].lot, 1)
         assert.equal(cars[1].slot, 1)
+        done()
     })
 
+    // UC15...search cars park in last 30 minutes
+    it.only(`should search cars park in last 30 minutes`, (done) => {
+        let date = new Date();
+        date.setMinutes(date.getMinutes() - 30)
+        let parkTimeFor1stCar = date.getTime()
+        let date1 = new Date()
+        date1.setMinutes(date1.getMinutes() - 50)
+        let parkTimeFor2ndCar = date1.getTime()
+        let date2 = new Date();
+        date2.setMinutes(date2.getMinutes() - 20)
+        let parkTimeFor3rdCar = date2.getTime()
+        let totalCars = [
+            { type: 'small', company: 'Toyota', color: `White`, parkTiming: parkTimeFor1stCar },
+            { type: 'small', company: 'BMW', color: `Blue`, parkTiming: parkTimeFor2ndCar },
+            { type: 'small', company: 'BMW', color: `Blue`, parkTiming: parkTimeFor3rdCar }
+        ]
+
+        totalCars.forEach(car => {
+            let parkCar = parkingLotObject.parkCar(car)
+        })
+
+        let carsParkedInLast30Minutes = parkingLotObject.searchCarsParkBefore30Minutes()
+        assert.equal(0, carsParkedInLast30Minutes[0].lot)
+        assert.equal(0, carsParkedInLast30Minutes[0].slot)
+        assert.equal(0, carsParkedInLast30Minutes[1].lot)
+        assert.equal(1, carsParkedInLast30Minutes[1].slot)
+        done()
+    })
+
+
+
 })
-
-
