@@ -202,7 +202,7 @@ class ParkingLOt {
         return cars;
     }
 
-    searchCarsParkBefore30Minutes() {
+    searchCarsParkedInLast30Minutes() {
         let date = new Date();
         let currentTiming = date.getTime()
         let cars = []

@@ -267,7 +267,7 @@ describe('Testing parkingLot extra functionality', function () {
             let parkCar = parkingLotObject.parkCar(car)
         })
 
-        let carsParkedInLast30Minutes = parkingLotObject.searchCarsParkBefore30Minutes()
+        let carsParkedInLast30Minutes = parkingLotObject.searchCarsParkedInLast30Minutes()
         assert.equal(0, carsParkedInLast30Minutes[0].lot)
         assert.equal(0, carsParkedInLast30Minutes[0].slot)
         assert.equal(0, carsParkedInLast30Minutes[1].lot)
