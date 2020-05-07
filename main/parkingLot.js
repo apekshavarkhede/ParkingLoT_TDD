@@ -134,44 +134,14 @@ class ParkingLOt {
         return false
     }
 
-    findCar(car) {
-        for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
-                if (this.parkingLot[lot][slot] === car) {
-                    let carPosition = {
-                        lot: lot,
-                        slot: slot
-                    }
-                    return carPosition
-                }
-            }
-        }
-    }
-
-    findCarWithSpecificColor(color) {
-        this.cars = []
+    searchCar(searchParameter) {
+        let cars = []
+        let keys = Object.keys(searchParameter);
+        let values = Object.values(searchParameter)
         for (let lot = 0; lot < this.parkingLot.length; lot++) {
             for (let slot = 0; slot < this.parkingLot.length; slot++) {
                 if (this.parkingLot[lot][slot] != null) {
-                    if (this.parkingLot[lot][slot].color === color) {
-                        let car = {
-                            lot: lot,
-                            slot: slot
-                        }
-                        this.cars.push(car)
-                    }
-                }
-            }
-        }
-        return this.cars
-    }
-
-    searchCarsWithCompanyAndColor(company, color) {
-        let cars = [];
-        for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
-                if (this.parkingLot[lot][slot] != null) {
-                    if (this.parkingLot[lot][slot].company === company && this.parkingLot[lot][slot].color === color) {
+                    if (this.parkingLot[lot][slot][keys[lot]] === values[lot] && this.parkingLot[lot][slot][keys[lot + 1]] === values[lot + 1]) {
                         let car = {
                             lot: lot,
                             slot: slot
@@ -182,24 +152,6 @@ class ParkingLOt {
             }
         }
         return cars
-    }
-
-    searchCarByCompanyName(company) {
-        let cars = [];
-        for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            for (let slot = 0; slot < this.parkingLot.length; slot++) {
-                if (this.parkingLot[lot][slot] != null) {
-                    if (this.parkingLot[lot][slot].company === company) {
-                        let car = {
-                            lot: lot,
-                            slot: slot
-                        }
-                        cars.push(car)
-                    }
-                }
-            }
-        }
-        return cars;
     }
 
     searchCarsParkedInLast30Minutes() {

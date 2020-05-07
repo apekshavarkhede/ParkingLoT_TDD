@@ -139,17 +139,23 @@ describe('Testing parkingLot extra functionality', function () {
 
     // UC7.. driver can find car
     it('given park car when driver serach car should able to search car', function () {
-        let car = {};
-        let car1 = {};
-        let car2 = {};
+        let totalCars = [
+            { type: 'small', color: 'silver', numberPlate: 'MH-41-AK-0910' },
+            { type: 'small', color: 'white', numberPlate: 'MH-14-NS-7799' },
+            { type: 'small', color: 'black', numberPlate: 'MH-15-AK-2244' },
+            { type: 'small', color: 'white', numberPlate: 'MH-19-AK-0460' },
+        ]
         let driverType = driver.type.NORMAL
-        let parkCar = parkingLotObject.parkCar(car, new Date(), driverType)
-        assert.isTrue(parkCar)
-        assert.isTrue(parkingLotObject.parkCar(car1, new Date(), driverType))
-        assert.isTrue(parkingLotObject.parkCar(car2, new Date(), driverType))
-        let positionOfDriverCar = parkingLotObject.findCar(car2)
-        assert.equal(0, positionOfDriverCar.lot)
-        assert.equal(1, positionOfDriverCar.slot)
+        totalCars.forEach(car => {
+            let parkCar = parkingLotObject.parkCar(car, new Date(), driverType)
+            assert.isTrue(parkCar)
+        })
+        let searchCar = {
+            numberPlate: 'MH-41-AK-0910'
+        }
+        let positionOfDriverCar = parkingLotObject.searchCar(searchCar)
+        assert.equal(0, positionOfDriverCar[0].lot)
+        assert.equal(0, positionOfDriverCar[0].slot)
     })
 
     // UC8.. inform owner about parking time of car
@@ -164,9 +170,8 @@ describe('Testing parkingLot extra functionality', function () {
     it(`should return nearest place for handicap driver to park the car`, function () {
         let car = {};
         let car1 = {};
-        let driverType = `${driver.driverType}`
         let parkCar = parkingLotObject.parkCar(car, new Date(), driver.type.NORMAL)
-        let parkAnotherCar = parkingLotObject.parkCar(car1, new Date(), driverType)
+        let parkAnotherCar = parkingLotObject.parkCar(car1, new Date(), driver.type.HANDICAP)
         assert.isTrue(parkCar)
         assert.isTrue(parkAnotherCar)
     })
@@ -183,7 +188,7 @@ describe('Testing parkingLot extra functionality', function () {
 
     // testCase for function not defined
     it(`should not exist`, () => {
-        expect(parkingLotObject.findCarWithSpecificColor()).to.be.not.undefined
+        expect(parkingLotObject.checkParkingLotFull()).to.be.not.undefined
     });
 
     //UC12..search all white car locations
@@ -198,7 +203,12 @@ describe('Testing parkingLot extra functionality', function () {
             let parkCar = parkingLotObject.parkCar(car, new Date())
             assert.isTrue(parkCar)
         })
-        let whiteCars = parkingLotObject.findCarWithSpecificColor('white')
+
+        let searchCar = {
+            color: 'white',
+        }
+
+        let whiteCars = parkingLotObject.searchCar(searchCar)
         assert.equal(whiteCars[0].lot, 1)
         assert.equal(whiteCars[0].slot, 0)
         assert.equal(whiteCars[1].lot, 1)
@@ -210,14 +220,21 @@ describe('Testing parkingLot extra functionality', function () {
         let totalCars = [
             { type: 'small', company: 'Toyota', color: `White` },
             { type: 'small', company: 'Toyota', color: `Blue` },
-            { type: 'small', company: 'Mahindra', color: `White` },
+            { type: 'small', company: 'Mahindra', color: `Blue` },
             { type: 'small', company: 'Toyota', color: `Blue` },
         ]
         totalCars.forEach(car => {
             let parkCar = parkingLotObject.parkCar(car, new Date())
             assert.isTrue(parkCar)
         })
-        let cars = parkingLotObject.searchCarsWithCompanyAndColor('Toyota', 'Blue')
+
+        let searchCar = {
+            company: 'Toyota',
+            color: 'Blue',
+        }
+
+        let cars = parkingLotObject.searchCar(searchCar)
+        console.log("cars===", cars);
         assert.equal(cars[0].lot, 1)
         assert.equal(cars[0].slot, 0)
         assert.equal(cars[1].lot, 1)
@@ -238,7 +255,11 @@ describe('Testing parkingLot extra functionality', function () {
             assert.isTrue(parkCar)
         })
 
-        let cars = parkingLotObject.searchCarByCompanyName('BMW')
+        let searchCar = {
+            company: 'BMW',
+        }
+
+        let cars = parkingLotObject.searchCar(searchCar)
         assert.equal(cars[0].lot, 1)
         assert.equal(cars[0].slot, 0)
         assert.equal(cars[1].lot, 1)
@@ -247,7 +268,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC15...search cars park in last 30 minutes
-    it.only(`should search cars park in last 30 minutes`, (done) => {
+    it(`should search cars park in last 30 minutes`, (done) => {
         let date = new Date();
         date.setMinutes(date.getMinutes() - 30)
         let parkTimeFor1stCar = date.getTime()
