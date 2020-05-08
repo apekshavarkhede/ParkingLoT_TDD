@@ -11,7 +11,7 @@ class ParkingLOt {
 
     // design parkingLot
     designParkingLot(lotNo, capacityOfEveryLot) {
-        this.parkingLot = [];
+        this.parkingLot = [lotNo];
         for (let lot = 0; lot < lotNo; lot++) {
             this.parkingLot[lot] = [capacityOfEveryLot]
             for (let slot = 0; slot < capacityOfEveryLot; slot++) {
@@ -44,8 +44,6 @@ class ParkingLOt {
             for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
                 if (this.parkingLot[slot][lot] === null) {
                     this.parkingLot[slot][lot] = car
-                    console.log("ur car is park at ", slot, lot, car);
-
                     this.noOfVehicles++
                     if (this.checkParkingLotFull()) {
                         owner.informParkingLotFull()
@@ -154,7 +152,7 @@ class ParkingLOt {
         return cars
     }
 
-    searchCarsParkedInLast30Minutes() {
+    searchCarsParkedInGivenMinutes(timeValue) {
         let date = new Date();
         let currentTiming = date.getTime()
         let cars = []
@@ -164,7 +162,7 @@ class ParkingLOt {
                     let difference = ((currentTiming - this.parkingLot[i][j].parkTiming) / 1000)
                     difference /= 60;
                     let differenceBetweenParkedTimining = Math.abs(Math.round(difference))
-                    if (differenceBetweenParkedTimining <= 30) {
+                    if (differenceBetweenParkedTimining <= timeValue) {
                         let carPosition = {
                             lot: i,
                             slot: j

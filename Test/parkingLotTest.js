@@ -295,5 +295,6 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(1, carsParkedInLast30Minutes[1].slot)
     })
 
+    // UC16..
 
 })
