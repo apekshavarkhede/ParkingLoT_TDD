@@ -177,17 +177,17 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     //UC11... search place to park the large car
-    it(`should search place to park the large vehicle`, function () {
+    it(`given cars when parked large vehicle should search place to park the large vehicle`, function () {
         // parkingLotObject = new parkingLot(3, 3, 6)
-        let totalCars = [{}, {}, new vehicle('large')]
+        let totalCars = [{}, {}, { type: 'large' }]
         totalCars.forEach(car => {
             let parkCar = parkingLotObject.parkCar(car)
             assert.isTrue(parkCar)
         })
     })
 
-    // testCase for function not defined
-    it(`should not exist`, () => {
+    // testCase for checking function defined or not
+    it(`should  exist`, () => {
         expect(parkingLotObject.checkParkingLotFull()).to.be.not.undefined
     });
 
@@ -216,7 +216,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC13...find Toyota cars having blue color
-    it(`should return all blue toyota blue cars`, () => {
+    it(`given cars when search blue toyota  should return all blue toyota  cars`, () => {
         let totalCars = [
             { type: 'small', company: 'Toyota', color: `White` },
             { type: 'small', company: 'Toyota', color: `Blue` },
@@ -234,7 +234,6 @@ describe('Testing parkingLot extra functionality', function () {
         }
 
         let cars = parkingLotObject.searchCar(searchCar)
-        console.log("cars===", cars);
         assert.equal(cars[0].lot, 1)
         assert.equal(cars[0].slot, 0)
         assert.equal(cars[1].lot, 1)
@@ -243,7 +242,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC14...find BMW cars
-    it(`should search car by company name`, (done) => {
+    it(`give cars when search car by company name  should search cars `, (done) => {
         let totalCars = [
             { type: 'small', company: 'Toyota', color: `White` },
             { type: 'small', company: 'BMW', color: `Blue` },
@@ -268,7 +267,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC15...search cars park in last 30 minutes
-    it(`should search cars park in last 30 minutes`, (done) => {
+    it(`given cars when search cars park in last 30 minutes should return cars`, () => {
         let date = new Date();
         date.setMinutes(date.getMinutes() - 30)
         let parkTimeFor1stCar = date.getTime()
@@ -293,9 +292,7 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(0, carsParkedInLast30Minutes[0].slot)
         assert.equal(0, carsParkedInLast30Minutes[1].lot)
         assert.equal(1, carsParkedInLast30Minutes[1].slot)
-        done()
     })
-
 
 
 })
