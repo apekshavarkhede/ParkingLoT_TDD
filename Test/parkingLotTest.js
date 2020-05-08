@@ -277,6 +277,7 @@ describe('Testing parkingLot extra functionality', function () {
         let date2 = new Date();
         date2.setMinutes(date2.getMinutes() - 20)
         let parkTimeFor3rdCar = date2.getTime()
+        let time = 30;
         let totalCars = [
             { type: 'small', company: 'Toyota', color: `White`, parkTiming: parkTimeFor1stCar },
             { type: 'small', company: 'BMW', color: `Blue`, parkTiming: parkTimeFor2ndCar },
@@ -287,7 +288,7 @@ describe('Testing parkingLot extra functionality', function () {
             let parkCar = parkingLotObject.parkCar(car)
         })
 
-        let carsParkedInLast30Minutes = parkingLotObject.searchCarsParkedInLast30Minutes()
+        let carsParkedInLast30Minutes = parkingLotObject.searchCarsParkedInGivenMinutes(time)
         assert.equal(0, carsParkedInLast30Minutes[0].lot)
         assert.equal(0, carsParkedInLast30Minutes[0].slot)
         assert.equal(0, carsParkedInLast30Minutes[1].lot)
