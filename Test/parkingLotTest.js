@@ -139,11 +139,14 @@ describe('Testing parkingLot extra functionality', function () {
 
     // UC7.. driver can find car
     it('given park car when driver serach car should able to search car', function () {
+        parkingLotObject = new parkingLot(3, 2, 6)
+
         let totalCars = [
             { type: 'small', color: 'silver', numberPlate: 'MH-41-AK-0910' },
             { type: 'small', color: 'white', numberPlate: 'MH-14-NS-7799' },
             { type: 'small', color: 'black', numberPlate: 'MH-15-AK-2244' },
             { type: 'small', color: 'white', numberPlate: 'MH-19-AK-0460' },
+
         ]
         let driverType = driver.type.NORMAL
         totalCars.forEach(car => {
@@ -242,7 +245,7 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC14...find BMW cars
-    it(`give cars when search car by company name  should search cars `, (done) => {
+    it(`give cars when search car by company name  should search cars `, () => {
         let totalCars = [
             { type: 'small', company: 'Toyota', color: `White` },
             { type: 'small', company: 'BMW', color: `Blue` },
@@ -263,7 +266,6 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(cars[0].slot, 0)
         assert.equal(cars[1].lot, 1)
         assert.equal(cars[1].slot, 1)
-        done()
     })
 
     // UC15...search cars park in last 30 minutes
@@ -296,5 +298,90 @@ describe('Testing parkingLot extra functionality', function () {
     })
 
     // UC16..
+    it(`given cars when search cars in specific row should return cars in that row`, function () {
+        parkingLotObject = new parkingLot(3, 2, 6)
+
+        let totalCars = [
+            { type: 'small', company: 'Toyota', color: `White`, parkTiming: new Date(), driverType: driver.type.HANDICAP },
+            { type: 'small', company: 'BMW', color: `Blue`, parkTiming: new Date(), driverType: driver.type.NORMAL },
+            { type: 'small', company: 'Toyota', color: `Blue`, parkTiming: new Date(), driverType: driver.type.NORMAL },
+            { type: 'small', company: 'Mahindra', color: `White`, parkTiming: new Date(), driverType: driver.type.HANDICAP },
+            { type: 'small', company: 'Lamborghini', color: `White`, parkTiming: new Date(), driverType: driver.type.HANDICAP },
+            { type: 'small', company: 'BMW', color: `White`, parkTiming: new Date(), driverType: driver.type.HANDICAP }
+        ]
+        totalCars.forEach(car => {
+            let parkCar = parkingLotObject.parkCar(car, new Date())
+            assert.isTrue(parkCar)
+        })
+        let searchCar = {
+            driverType: 'handicap'
+        }
+
+        let rows = [0, 2];
+        let cars = parkingLotObject.searchCar(searchCar, rows)
+        assert.equal(cars[0].lot, 0)
+        assert.equal(cars[0].slot, 0)
+        assert.equal(cars[1].lot, 0)
+        assert.equal(cars[1].slot, 1)
+        assert.equal(cars[2].lot, 2)
+        assert.equal(cars[2].slot, 1)
+
+
+
+    })
 
 })
+// searchCarsInSpecificRows(searchParameter, rows) {
+//     let m = rows.length
+//     let vehicles = [];
+//     let keys = Object.keys(searchParameter);
+//     let values = Object.values(searchParameter)
+//     for (let lot = 0; lot < m; lot++) {
+//         for (let slot = 0; slot < this.parkingLot[rows[lot]].length; slot++) {
+//             console.log("this.parkingLot[rows[lot]]", this.parkingLot[rows[1]]);
+//             if (this.parkingLot[lot][slot] != null) {
+//                 // console.log("this.parkingLot[lot][slot][keys[lot]]", [this.parkingLot[lot][slot][keys[slot]]], lot, slot);
+//                 // console.log("this.parkingLot[lot][slot]", this.parkingLot[lot][slot],lot);
+//                 // console.log("values[lot]", values[lot]);
+//                 console.log("this.parkingLot[lot][slot][keys[lot]] === values[lot]", this.parkingLot[lot][slot][keys] === values[lot], lot, slot);
+//                 console.log("hiii", [keys]);
+
+//                 if (this.parkingLot[lot][slot][keys] === values[lot] && this.parkingLot[lot][slot][keys + 1] === values[lot + 1]) {
+//                     let pos = {
+//                         lot: lot,
+//                         slot: slot
+//                     }
+//                     vehicles.push(pos)
+//                 }
+//             }
+//         }
+//     }
+//     return vehicles;
+// }
+
+//   // UC16...searchCars in specific rows
+//   it(`given cars when search cars in specific row should return cars in that row`, function () {
+//     parkingLotObject = new parkingLot(3, 2, 6)
+
+//     let totalCars = [
+//         { type: 'small', company: 'Toyota', color: `White`, parkTiming: new Date(), driverType: driver.type.HANDICAP },
+//         { type: 'small', company: 'BMW', color: `Blue`, parkTiming: new Date(), driverType: driver.type.NORMAL },
+//         { type: 'small', company: 'MMMMMMMMMMM', color: `White`, parkTiming: new Date(), driverType: driver.type.NORMAL },
+//         { type: 'small', company: 'BBBBBBBBBBB', color: `Blue`, parkTiming: new Date(), driverType: driver.type.NORMAL },
+//         { type: 'small', company: 'X', color: `White`, parkTiming: new Date(), driverType: driver.type.HANDICAP }
+//         // { type: 'small', company: 'BMW', color: `Blue` },
+//     ]
+//     totalCars.forEach(car => {
+//         let parkCar = parkingLotObject.parkCar(car, new Date())
+//         // assert.isTrue(parkCar)
+//     })
+//     let searchCar = {
+//         driverType: 'handicap'
+//     }
+
+//     let rows = [0, 2];
+//     let cars = parkingLotObject.searchCarsInSpecificRows(searchCar, rows)
+//     console.log("cars===", cars);
+
+
+// })

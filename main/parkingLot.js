@@ -27,7 +27,7 @@ class ParkingLOt {
                 if (car.type === 'large') {
                     return this.parkLargeVehicle(car)
                 }
-                if (driverType === 'handicap') {
+                if (car.driverType === 'handicap') {
                     return this.searchPlaceForHandicapDriverAndParkCar(car)
                 }
                 else {
@@ -41,7 +41,7 @@ class ParkingLOt {
 
     searchPlaceForNormalDriverAndParkCar(car) {
         for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
+            for (let slot = 0; slot < this.parkingLot.length; slot++) {
                 if (this.parkingLot[slot][lot] === null) {
                     this.parkingLot[slot][lot] = car
                     this.noOfVehicles++
@@ -132,24 +132,31 @@ class ParkingLOt {
         return false
     }
 
-    searchCar(searchParameter) {
-        let cars = []
-        let keys = Object.keys(searchParameter);
-        let values = Object.values(searchParameter)
-        for (let lot = 0; lot < this.parkingLot.length; lot++) {
-            for (let slot = 0; slot < this.parkingLot.length; slot++) {
-                if (this.parkingLot[lot][slot] != null) {
-                    if (this.parkingLot[lot][slot][keys[lot]] === values[lot] && this.parkingLot[lot][slot][keys[lot + 1]] === values[lot + 1]) {
-                        let car = {
-                            lot: lot,
-                            slot: slot
+    searchCar(searchParameter, rows) {
+        if (rows != undefined && rows.length != 0) {
+            return this.searchCarInSpecificRow(searchParameter, rows)
+        }
+        else {
+            let cars = []
+            let keys = Object.keys(searchParameter);
+            let values = Object.values(searchParameter)
+            for (let x = 0; x < keys.length; x++) {
+                for (let lot = 0; lot < this.parkingLot.length; lot++) {
+                    for (let slot = 0; slot < this.parkingLot[lot].length; slot++) {
+                        if (this.parkingLot[lot][slot] != null) {
+                            if (this.parkingLot[lot][slot][keys[x]] === values[x] && this.parkingLot[lot][slot][keys[x + 1]] === values[x + 1]) {
+                                let car = {
+                                    lot: lot,
+                                    slot: slot
+                                }
+                                cars.push(car)
+                            }
                         }
-                        cars.push(car)
                     }
                 }
             }
+            return cars
         }
-        return cars
     }
 
     searchCarsParkedInGivenMinutes(timeValue) {
@@ -168,6 +175,30 @@ class ParkingLOt {
                             slot: j
                         }
                         cars.push(carPosition)
+                    }
+                }
+            }
+        }
+        return cars
+    }
+
+    searchCarInSpecificRow(searchParameter, rows) {
+        let noOfRows = rows.length;
+        let cars = []
+        let keys = Object.keys(searchParameter);
+        let values = Object.values(searchParameter)
+        for (let x = 0; x < keys.length; x++) {
+            for (let lot = 0; lot < noOfRows; lot++) {
+                for (let slot = 0; slot < this.parkingLot[rows[lot]].length; slot++) {
+                    if (this.parkingLot[rows[lot]][slot] != null && this.parkingLot[rows[lot]][slot] != undefined) {
+                        if (this.parkingLot[rows[lot]][slot][keys[x]] === values[x]
+                            && this.parkingLot[rows[lot]][slot][keys[x + 1]] === values[x + 1]) {
+                            let car = {
+                                lot: rows[lot],
+                                slot: slot
+                            }
+                            cars.push(car)
+                        }
                     }
                 }
             }
