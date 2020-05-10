@@ -297,7 +297,7 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(1, carsParkedInLast30Minutes[1].slot)
     })
 
-    // UC16..
+    // UC16..search cars in specific rows
     it(`given cars when search cars in specific row should return cars in that row`, function () {
         parkingLotObject = new parkingLot(3, 2, 6)
 
@@ -325,9 +325,30 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(cars[1].slot, 1)
         assert.equal(cars[2].lot, 2)
         assert.equal(cars[2].slot, 1)
-
-
-
     })
 
+    // UC17..search fradulent plate numbers car position
+    it(`given cars when search cars having fradulent plate number should return position of those cars`, () => {
+        let totalCars = [
+            { type: 'small', color: 'silver', numberPlate: 'MH-41-AK-0910', parkTiming: new Date(), driverType: driver.type.NORMAL },
+            { type: 'small', color: 'white', numberPlate: '', parkTiming: new Date(), driverType: driver.type.NORMAL },
+            { type: 'small', color: 'white', numberPlate: '', parkTiming: new Date(), driverType: driver.type.NORMAL },
+            { type: 'small', color: 'black', numberPlate: 'MH-15-AK-2244', parkTiming: new Date(), driverType: driver.type.NORMAL }
+        ]
+
+        totalCars.forEach(car => {
+            let park = parkingLotObject.parkCar(car)
+            assert.isTrue(park)
+        })
+
+        let car = {
+            numberPlate: ''
+        }
+
+        let cars = parkingLotObject.searchCar(car)
+        assert.equal(cars[0].lot, 0)
+        assert.equal(cars[0].slot, 1)
+        assert.equal(cars[1].lot, 1)
+        assert.equal(cars[1].slot, 0)
+    })
 })
