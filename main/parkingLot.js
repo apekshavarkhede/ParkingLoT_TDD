@@ -133,6 +133,9 @@ class ParkingLOt {
     }
 
     searchCar(searchParameter, rows) {
+        if (Object.keys(searchParameter).length === 0) {
+            throw new Error("Please Enter correct information")
+        }
         if (rows != undefined && rows.length != 0) {
             return this.searchCarInSpecificRow(searchParameter, rows)
         }

@@ -351,4 +351,25 @@ describe('Testing parkingLot extra functionality', function () {
         assert.equal(cars[1].lot, 1)
         assert.equal(cars[1].slot, 0)
     })
+
+
+    it(`should throw exception when sear searching parameter is empty`, function () {
+        try {
+            parkingLotObject = new parkingLot(2, 2, 4)
+            let totalCars = [
+                { type: 'small', color: 'silver' },
+                { type: 'small', color: 'white' },
+                { type: 'small', color: 'black' },
+                { type: 'small', color: 'white' },
+            ]
+            totalCars.forEach(car => {
+                let parkCar = parkingLotObject.parkCar(car, new Date())
+                assert.isTrue(parkCar)
+            })
+            let searchCar = {}
+            parkingLotObject.searchCar(searchCar)
+        } catch (error) {
+            assert.equal("Please Enter correct information", error.message)
+        }
+    })
 })
